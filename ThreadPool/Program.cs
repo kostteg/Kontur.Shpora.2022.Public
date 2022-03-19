@@ -31,7 +31,7 @@ namespace ThreadPool
 			Enumerable.Range(0, iterations).ForEach(_ => TestOneAction());
 		}
 
-		[TestCase(10000)]
+		[TestCase(2000)]
 		public void TestDispose(int iterations)
 		{
 			Enumerable.Range(0, iterations).AsParallel().WithDegreeOfParallelism(Environment.ProcessorCount).ForAll(_ => TestOneAction());
@@ -62,6 +62,26 @@ namespace ThreadPool
 			stopwatch.Stop();
 			Console.WriteLine(stopwatch.Elapsed);
 			Assert.Less(stopwatch.ElapsedMilliseconds, iterations);
+		}
+
+		[Test]
+		public void TestFasterThanSequentiallyExecuting()
+		{
+			var eventsCount = Concurrency * 2;
+			using var threadPool = CreateThreadPool(Concurrency);
+			var countdownEvent = new CountdownEvent(eventsCount);
+
+			var sw = Stopwatch.StartNew();
+			Action action = () =>
+			{
+				Thread.Sleep(500);
+				countdownEvent.Signal();
+			};
+			for (var i = 0; i < eventsCount; i++)
+				threadPool.EnqueueAction(action);
+			countdownEvent.Wait();
+			sw.Stop();
+			Assert.AreEqual(1_000, sw.ElapsedMilliseconds, 250);
 		}
 
 		[Test, Explicit("Next level")]
