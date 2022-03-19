@@ -56,7 +56,6 @@ namespace ThreadPool
 		[TestCase(1000), Explicit("Next level")]
 		public void TestNoSleepInDispatchLoop(int iterations)
 		{
-			using var threadPool = CreateThreadPool(Concurrency);
 			var stopwatch = Stopwatch.StartNew();
 			Enumerable.Range(0, iterations).ForEach(_ => TestOneAction());
 			stopwatch.Stop();
