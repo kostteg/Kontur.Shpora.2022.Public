@@ -6,6 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockFree", "LockFree\LockFr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuantumOfSwitching", "QuantumOfSwitching\QuantumOfSwitching.csproj", "{86E9B4F6-DEF3-4A80-8A8B-F7FB0AE6CF47}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReaderWriterLock", "ReaderWriterLock\ReaderWriterLock.csproj", "{015D9144-CBF2-4501-B4DE-5DEFBE7A7CE4}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recap", "Recap\Recap.csproj", "{3A205471-BF05-46EC-8C01-C47642DE3FD4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreadPool", "ThreadPool\ThreadPool.csproj", "{0B84AD51-B532-4E6B-BFBF-14F04D792163}"
@@ -30,6 +32,10 @@ Global
 		{86E9B4F6-DEF3-4A80-8A8B-F7FB0AE6CF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86E9B4F6-DEF3-4A80-8A8B-F7FB0AE6CF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86E9B4F6-DEF3-4A80-8A8B-F7FB0AE6CF47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015D9144-CBF2-4501-B4DE-5DEFBE7A7CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015D9144-CBF2-4501-B4DE-5DEFBE7A7CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015D9144-CBF2-4501-B4DE-5DEFBE7A7CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015D9144-CBF2-4501-B4DE-5DEFBE7A7CE4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A205471-BF05-46EC-8C01-C47642DE3FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A205471-BF05-46EC-8C01-C47642DE3FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A205471-BF05-46EC-8C01-C47642DE3FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
