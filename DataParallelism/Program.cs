@@ -130,8 +130,7 @@ namespace DataParallelism
 			var options = new ParallelOptions
 			{
 				MaxDegreeOfParallelism = 1,
-				CancellationToken = CancellationToken.None,
-				TaskScheduler = TaskScheduler.Default
+				CancellationToken = CancellationToken.None
 			};
 
 			Parallel.Invoke(options, actions);
@@ -141,23 +140,22 @@ namespace DataParallelism
 		{
 			int count = 0;
 
-			var actions = Enumerable.Range(0, 10000).Select(i => (Action)(() =>
+			var actions = Enumerable.Range(0, 1000).Select(i => (Action)(() =>
 			{
 				Console.Write('.');
 				Interlocked.Increment(ref count);
 			})).ToArray();
-			actions[10] = () =>
+			actions[10] = actions[20] = actions[30] = () =>
 			{
 				Console.Write('.');
 				Interlocked.Increment(ref count);
-				throw new Exception("!!!");
+				throw new Exception($"Exception on thread {Thread.CurrentThread.ManagedThreadId}");
 			};
 
 			var options = new ParallelOptions
 			{
-				MaxDegreeOfParallelism = 4,
-				CancellationToken = CancellationToken.None,
-				TaskScheduler = TaskScheduler.Default
+				MaxDegreeOfParallelism = 2,
+				CancellationToken = CancellationToken.None
 			};
 
 			try
@@ -177,7 +175,7 @@ namespace DataParallelism
 			var random = new Random();
 			var numbers = Enumerable.Range(0, 100).Select(_ => random.Next(0, 16)).ToArray();
 
-			Parallel.ForEach(numbers, n => Console.WriteLine($"[{Thread.CurrentThread.ManagedThreadId}]\t{n}\t{Fib(n)}"));
+			Parallel.ForEach(numbers, n => Console.WriteLine($"[{Thread.CurrentThread.ManagedThreadId}]\t{n} -> {Fib(n)}"));
 		}
 
 		private static void ParallelForEachWithLocalInitAndLocalFinallyDemo()
