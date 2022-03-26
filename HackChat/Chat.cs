@@ -110,14 +110,17 @@ namespace HackChat
 
         private IEnumerable<IPAddress> CalcNearbyIPAddresses(IPAddress ip)
         {
-            yield return IPAddress.Parse("127.0.0.1");
-            yield break;
-            var bytes = ip.GetAddressBytes();
-            for (int i = 0; i < 256; i++)
-            {
-                bytes[3] = (byte)i;
-                yield return new IPAddress(bytes);
-            }
+	        // yield return IPAddress.Parse("127.0.0.1");
+	        // yield break;
+	        var bytes = ip.GetAddressBytes();
+	        Array.Reverse(bytes);
+	        var raw = BitConverter.ToUInt32(bytes, 0);
+	        for (uint b = 1; b <= 1022; b++)
+	        {
+		        var newIp = BitConverter.GetBytes((raw & 0b11111111_11111111_11111100_00000000) | b);
+		        Array.Reverse(newIp);
+		        yield return new IPAddress(newIp);
+	        }
         }
 
         
